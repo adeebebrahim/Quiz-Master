@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back" />
+
+    <Button
+        android:id="@+id/coding_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coding"/>
+
+    <Button
+        android:id="@+id/sports_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sports"/>
+
+    <Button
+        android:id="@+id/tv_movies_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TV/Movies"/>
+
+    <Button
+        android:id="@+id/general_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="General"/>
+
+</LinearLayout>
