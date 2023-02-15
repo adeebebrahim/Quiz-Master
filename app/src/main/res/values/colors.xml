@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="pastel_blue">#aec6cf</color>
+    <color name="pastel_pink">#ffd1dc</color>
+    <color name="pastel_green">#98ff98</color>
+    <color name="pastel_yellow">#f3ffa3</color>
+    <color name="pastel_purple">#b19cd9</color>
+    <color name="pastel_turquoise">#afeeee</color>
+    <color name="pastel_lilac">#c8a2c8</color>
+    <color name="pastel_orange">#ffb347</color>
+    <color name="pastel_mint">#98fb98</color>
+    <color name="pastel_lavender">#e6e6fa</color>
+    <color name="pastel_peach">#ffdab9</color>
+    <color name="pastel_salmon">#fa8072</color>
+    <color name="pastel_teal">#008080</color>
+    <color name="pastel_gold">#ffd700</color>
+    <color name="pastel_coral">#ff7f50</color>
+    <color name="pastel_beige">#f5f5dc</color>
+    <color name="pastel_lime">#dfff00</color>
+    <color name="pastel_gray">#d3d3d3</color>
+    <color name="pastel_brown">#c19a6b</color>
+    <color name="pastel_rose">#ffe4e1</color>
+    <color name="pastel_sky">#87ceeb</color>
+    <color name="pastel_taupe">#483c32</color>
+    <color name="pastel_tan">#d2b48c</color>
+    <color name="pastel_salmonpink">#ff91a4</color>
+
+    <color name="white">#FFFFFF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="blue_dark">#00008B</color>
+    <color name="purple">#A020F0</color>
+    <color name="purple_dark">#301934</color>
+    <color name="red">#FF0000</color>
+    <color name="red_dark">#8B0000</color>
 </resources>

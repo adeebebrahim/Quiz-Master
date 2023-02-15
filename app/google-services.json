@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "481128654305",
+    "firebase_url": "https://quiz-master-e817b-default-rtdb.firebaseio.com",
+    "project_id": "quiz-master-e817b",
+    "storage_bucket": "quiz-master-e817b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481128654305:android:be08e80b9b1c0f81c69ea0",
+        "android_client_info": {
+          "package_name": "com.example.quizmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481128654305-eac8p0be3ui30dk5li4f821f6qej0nrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7WNe2l68SFimqi29c-0FrDiiXjph3YDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481128654305-eac8p0be3ui30dk5li4f821f6qej0nrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
