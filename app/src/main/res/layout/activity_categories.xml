@@ -7,32 +7,39 @@
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:text="Back"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"/>
+    />
 
     <Button
         android:id="@+id/coding_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coding"/>
+        android:text="Coding"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/sports_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sports"/>
+        android:text="Sports"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/tv_movies_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TV/Movies"/>
+        android:text="TV/Movies"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/general_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="General"/>
+        android:text="General"
+        android:layout_margin="10dp" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.quizmaster;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private Button howToPlayButton;
     private Button soundButton;
     private MediaPlayer mediaPlayer;
+    private static boolean soundOn = false;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        boolean soundOn = getSoundState();
+        if (soundOn) {
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.theme);
+            mediaPlayer.start();
+            soundButton.setText("Sound On");
+        } else {
+            soundButton.setText("Sound Off");
+        }
+
         soundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,10 +64,12 @@ public class MainActivity extends AppCompatActivity {
                     mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.theme);
                     mediaPlayer.start();
                     soundButton.setText("Sound On");
+                    saveSoundState(true);
                 } else {
                     mediaPlayer.stop();
                     mediaPlayer = null;
                     soundButton.setText("Sound Off");
+                    saveSoundState(false);
                 }
             }
         });
@@ -85,4 +99,17 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer = null;
         }
     }
+
+    private void saveSoundState(boolean isSoundOn) {
+        SharedPreferences sharedPreferences = getSharedPreferences("SoundState", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isSoundOn", isSoundOn);
+        editor.apply();
+    }
+
+    private boolean getSoundState() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SoundState", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isSoundOn", false);
+    }
+
 }
