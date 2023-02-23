@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:icon="@drawable/ic_arrow_back"
+        android:backgroundTint="@color/pastel_turquoise"
         app:iconGravity="textStart"
         android:text="Back"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/pastel_teal" />

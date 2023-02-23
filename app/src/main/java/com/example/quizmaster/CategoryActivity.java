@@ -11,6 +11,22 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import androidx.annotation.NonNull;
+
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryActivity extends AppCompatActivity {
 
     private Button backButton;
@@ -20,11 +36,14 @@ public class CategoryActivity extends AppCompatActivity {
     private Button generalButton;
     private MediaPlayer mediaPlayer;
     private boolean soundOn;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ConstraintLayout constraintLayout = findViewById(R.id.mainLayout1);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
@@ -56,7 +75,7 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, QuizActivity.class);
-                intent.putExtra("category", "coding");
+                intent.putExtra("category", "Coding");
                 startActivity(intent);
             }
         });
@@ -65,7 +84,7 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, QuizActivity.class);
-                intent.putExtra("category", "sports");
+                intent.putExtra("category", "Sports");
                 startActivity(intent);
             }
         });
@@ -74,20 +93,48 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, QuizActivity.class);
-                intent.putExtra("category", "tv_movies");
+                intent.putExtra("category", "TV/Movies");
                 startActivity(intent);
             }
         });
 
         generalButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CategoryActivity.this, QuizActivity.class);
-                intent.putExtra("category", "general");
-                startActivity(intent);
+            public void onClick(View v) {
+                startQuizActivity("General");
             }
         });
 
+    }
+
+    private void startQuizActivity(String category) {
+        // Query Firebase Realtime Database for all questions in the selected category
+        Query query = mDatabase.child("questions").orderByChild("category").equalTo(category);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Question> questions = new ArrayList<>();
+//                Log.d("question : " , String.valueOf(dataSnapshot.getChildren()));
+                for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
+//                    Log.d("question1 " , String.valueOf(questionSnapshot.getValue()));
+                    Question question = questionSnapshot.getValue(Question.class);
+//                    Log.d("qname", question.getQuestionText());
+                    questions.add(question);
+                }
+
+                // Pass the selected category and list of questions to the QuizActivity
+                Intent intent = new Intent(CategoryActivity.this, QuizActivity.class);
+                intent.putExtra("category", category);
+                intent.putExtra("questions", (Serializable) questions);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("CategoryActivity", "onCancelled", databaseError.toException());
+            }
+        });
     }
 
     @Override
