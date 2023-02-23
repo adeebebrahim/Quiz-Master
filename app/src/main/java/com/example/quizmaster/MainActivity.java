@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout constraintLayout = findViewById(R.id.mainLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2500);
-        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2500);
         animationDrawable.start();
 
         playButton = findViewById(R.id.play_button);

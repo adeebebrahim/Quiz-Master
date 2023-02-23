@@ -32,6 +32,7 @@ import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
 
+    private TextView scoreTextView;
     private TextView questionTextView;
     private Button option1Button;
     private Button option2Button;
@@ -57,6 +58,7 @@ public class QuizActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
 
+        scoreTextView = findViewById(R.id.score_text);
         questionTextView = findViewById(R.id.question_text);
         option1Button = findViewById(R.id.option_1);
         option2Button = findViewById(R.id.option_2);
@@ -66,6 +68,8 @@ public class QuizActivity extends AppCompatActivity {
         questionList = new ArrayList<>();
         currentQuestionIndex = 0;
         score = 0;
+
+        scoreTextView.setText("Your score: " + score);
 
         // Retrieve the category selected by the user in CategoryActivity
         Intent intent = getIntent();
@@ -135,6 +139,12 @@ public class QuizActivity extends AppCompatActivity {
         option2Button.setText(currentQuestion.getOption2());
         option3Button.setText(currentQuestion.getOption3());
         option4Button.setText(currentQuestion.getOption4());
+
+        // Set the background color of all buttons to the default color
+        option1Button.setBackgroundColor(ContextCompat.getColor(this, R.color.pastel_turquoise));
+        option2Button.setBackgroundColor(ContextCompat.getColor(this, R.color.pastel_turquoise));
+        option3Button.setBackgroundColor(ContextCompat.getColor(this, R.color.pastel_turquoise));
+        option4Button.setBackgroundColor(ContextCompat.getColor(this, R.color.pastel_turquoise));
     }
 
     private void checkAnswer(Button selectedButton) {
@@ -143,29 +153,34 @@ public class QuizActivity extends AppCompatActivity {
 
         if (selectedButton.getText().equals(correctAnswer)) {
             // The selected answer is correct
-            selectedButton.setBackground(new ColorDrawable(ContextCompat.getColor(this, R.color.green)));
+            selectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
             score++;
         } else {
             // The selected answer is incorrect
-            selectedButton.setBackground(new ColorDrawable(ContextCompat.getColor(this, R.color.red)));
+            selectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
 
             // Highlight the correct answer in green
             if (option1Button.getText().equals(correctAnswer)) {
-                option1Button.setBackground(ContextCompat.getDrawable(this, R.color.green));
+                option1Button.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
             } else if (option2Button.getText().equals(correctAnswer)) {
-                option2Button.setBackground(ContextCompat.getDrawable(this, R.color.green));
+                option2Button.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
             } else if (option3Button.getText().equals(correctAnswer)) {
-                option3Button.setBackground(ContextCompat.getDrawable(this, R.color.green));
+                option3Button.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
             } else if (option4Button.getText().equals(correctAnswer)) {
-                option4Button.setBackground(ContextCompat.getDrawable(this, R.color.green));
+                option4Button.setBackgroundColor(ContextCompat.getColor(this, R.color.green));
             }
         }
 
+        option1Button = findViewById(R.id.option_1);
+        option2Button = findViewById(R.id.option_2);
+        option3Button = findViewById(R.id.option_3);
+        option4Button = findViewById(R.id.option_4);
+
         // Disable the answer buttons so the user cannot select another answer
-        option1Button.setEnabled(false);
-        option2Button.setEnabled(false);
-        option3Button.setEnabled(false);
-        option4Button.setEnabled(false);
+//        option1Button.setEnabled(false);
+//        option2Button.setEnabled(false);
+//        option3Button.setEnabled(false);
+//        option4Button.setEnabled(false);
 
         // Delay showing the next question for a short period of time, then display it
         new android.os.Handler().postDelayed(
@@ -175,18 +190,19 @@ public class QuizActivity extends AppCompatActivity {
                         if (currentQuestionIndex < questionList.size() - 1) {
                             currentQuestionIndex++;
                             displayQuestion(currentQuestionIndex);
-                            option1Button.setEnabled(true);
-                            option2Button.setEnabled(true);
-                            option3Button.setEnabled(true);
-                            option4Button.setEnabled(true);
+//                            option1Button.setEnabled(true);
+//                            option2Button.setEnabled(true);
+//                            option3Button.setEnabled(true);
+//                            option4Button.setEnabled(true);
                         } else {
                             // If there are no more questions, end the quiz and show the score
                             endQuiz();
                         }
                     }
                 },
-                1000 // Delay for 1 second
+                500 // Delay for 1 second
         );
+        scoreTextView.setText("Your score: " + score);
     }
 
     private void endQuiz() {

@@ -8,15 +8,14 @@
     android:id="@+id/mainLayout"
     >
 
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="Quiz Master"
-        android:textColor="@color/black"
-        android:textSize="36sp"
+    <ImageView
+        android:id="@+id/logo_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,15 +23,16 @@
         android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="0dp"
         android:backgroundTint="@color/pastel_turquoise"
+        android:fontFamily="@font/leaguespartan_bold"
         android:text="Play"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:layout_constraintTop_toBottomOf="@id/logo_view"
         app:rippleColor="@color/pastel_teal" />
 
     <com.google.android.material.button.MaterialButton
@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/pastel_turquoise"
+        android:fontFamily="@font/leaguespartan_bold"
         android:text="How to Play"
         android:textColor="@android:color/black"
         android:textSize="16sp"
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/pastel_turquoise"
+        android:fontFamily="@font/leaguespartan_bold"
         android:text="Sound Off"
         android:textColor="@android:color/black"
         android:textSize="16sp"
