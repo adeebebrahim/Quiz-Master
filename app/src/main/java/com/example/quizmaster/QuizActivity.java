@@ -1,13 +1,16 @@
 package com.example.quizmaster;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +41,8 @@ public class QuizActivity extends AppCompatActivity {
     private Button option2Button;
     private Button option3Button;
     private Button option4Button;
+    private MediaPlayer mediaPlayer;
+    private boolean soundOn;
 
     private List<Question> questionList;
     private int currentQuestionIndex;
@@ -51,12 +56,21 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         ConstraintLayout constraintLayout = findViewById(R.id.mainLayout2);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
+
+        soundOn = getSoundState();
+
+        if (soundOn) {
+            mediaPlayer = MediaPlayer.create(QuizActivity.this, R.raw.theme);
+            mediaPlayer.start();
+        }
 
         scoreTextView = findViewById(R.id.score_text);
         questionTextView = findViewById(R.id.question_text);
@@ -176,11 +190,11 @@ public class QuizActivity extends AppCompatActivity {
         option3Button = findViewById(R.id.option_3);
         option4Button = findViewById(R.id.option_4);
 
-        // Disable the answer buttons so the user cannot select another answer
-//        option1Button.setEnabled(false);
-//        option2Button.setEnabled(false);
-//        option3Button.setEnabled(false);
-//        option4Button.setEnabled(false);
+//         Disable the answer buttons so the user cannot select another answer
+        option1Button.setEnabled(false);
+        option2Button.setEnabled(false);
+        option3Button.setEnabled(false);
+        option4Button.setEnabled(false);
 
         // Delay showing the next question for a short period of time, then display it
         new android.os.Handler().postDelayed(
@@ -190,10 +204,10 @@ public class QuizActivity extends AppCompatActivity {
                         if (currentQuestionIndex < questionList.size() - 1) {
                             currentQuestionIndex++;
                             displayQuestion(currentQuestionIndex);
-//                            option1Button.setEnabled(true);
-//                            option2Button.setEnabled(true);
-//                            option3Button.setEnabled(true);
-//                            option4Button.setEnabled(true);
+                            option1Button.setEnabled(true);
+                            option2Button.setEnabled(true);
+                            option3Button.setEnabled(true);
+                            option4Button.setEnabled(true);
                         } else {
                             // If there are no more questions, end the quiz and show the score
                             endQuiz();
@@ -214,6 +228,36 @@ public class QuizActivity extends AppCompatActivity {
         intent.putExtra("score", score);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (soundOn && mediaPlayer != null) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    private boolean getSoundState() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SoundState", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isSoundOn", false);
     }
 
 }
