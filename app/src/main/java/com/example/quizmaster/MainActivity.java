@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                intent.putExtra("PLAYBACK_POSITION", mediaPlayer != null ? mediaPlayer.getCurrentPosition() : 0);
                 startActivity(intent);
             }
         });
